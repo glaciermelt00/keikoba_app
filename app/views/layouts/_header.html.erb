@@ -1,0 +1,31 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <%= link_to image_tag('dojo.png', size: 30), root_path, class: "logo navbar-brand" %>
+      <%= link_to "KEIKOBA", root_path, class: "logo navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fas fa-crown fa-lg" href="#"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fas fa-book-open fa-lg" href="#"></a>
+          </li>
+          <li class="nav-item">
+            <i class="nav-link fas fa-search fa-lg disabled"></i>
+          </li>
+          <li class="nav-item">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="検索..." aria-label="Search">
+            </form>
+          </li>
+        </ul>
+        <button class="btn btn-light me-2" type="submit">ログイン</button>
+        <button class="btn btn-primary" type="submit">新規登録</button>
+      </div>
+    </div>
+  </nav>
+</header>
