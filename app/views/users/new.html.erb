@@ -1,2 +1,41 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, "Sign up") %>
+<h1 class="mt-5 pt-5 text-center">KEIKOBAにようこそ！</h1>
+<div class="signup-form">
+  <form action="/examples/actions/confirmation.php" method="post" class="form-horizontal">
+    <div class="row">
+      <div class="col-8 offset-4">
+        <h2>KEIKOBAに登録</h2>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-4">アカウント名</label>
+      <div class="col-8">
+        <input type="text" class="form-control" name="username" required="required" placeholder="KEIKOBAさん">
+      </div>        	
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-4">メールアドレス</label>
+      <div class="col-8">
+        <input type="email" class="form-control" name="email" required="required" placeholder="mail@keikoba.com">
+      </div>        	
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-4">パスワード</label>
+      <div class="col-8">
+        <input type="password" class="form-control" name="password" required="required" placeholder="******">
+      </div>        	
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-4">パスワード再入力</label>
+      <div class="col-8">
+        <input type="password" class="form-control" name="confirm_password" required="required" placeholder="******">
+      </div>        	
+    </div>
+    <div class="form-group row">
+      <div class="col-8 offset-4">
+        <button type="submit" class="btn btn-primary btn-lg">登録する</button>
+      </div>  
+    </div>		      
+  </form>
+	<div class="text-center"><a href="#">ログインはこちら</a></div>
+</div>

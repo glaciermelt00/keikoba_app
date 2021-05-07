@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <%= link_to "", root_path, class: "fas fa-vihara  navbar-brand" %>
       <%= link_to "KEIKOBA", root_path, class: "navbar-brand" %>
@@ -24,7 +24,7 @@
           </li>
         </ul>
         <button class="btn btn-light me-2" type="submit">ログイン</button>
-        <button class="btn btn-primary" type="submit">新規登録</button>
+        <%= link_to "新規登録", signup_path, class: "btn btn-primary" %>
       </div>
     </div>
   </nav>

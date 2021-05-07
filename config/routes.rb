@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # get 'users/update'
   # get 'users/destroy'
   resources :users
+  get 'signup', to: 'users#new'
   get 'users/guest'
   get 'users/following'
   get 'users/followers'
