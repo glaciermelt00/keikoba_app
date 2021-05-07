@@ -35,3 +35,8 @@ ClassAndModuleChildren:
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+# RSpec のコードだけ Metrics/BlockLength を無視する
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
