@@ -1,0 +1,20 @@
+<header class="mt-5 pt-5">
+  <div class="container flex-container">
+    <div class="row">
+      <div class="col">
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary">フォロー</button>
+        <button type="button" class="btn btn-light">設定</button>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <span>フォロー XX</span>
+        <span>フォロワー XX</span>
+      </div>
+    </div>
+  </div>
+</header>

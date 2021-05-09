@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'users#show'
+  root 'users#new'
   # get 'users/show'
   # get 'users/new'
   # get 'users/create'

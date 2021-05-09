@@ -1,5 +1,13 @@
 @import "bootstrap";
 
+/* mixins, variables, etc. */
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 /* sign up */
 
 .form-control {
@@ -70,4 +78,14 @@
 }	
 .signup-form form a:hover {
 	text-decoration: underline;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }
