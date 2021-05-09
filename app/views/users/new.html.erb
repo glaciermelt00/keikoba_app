@@ -1,41 +1,50 @@
 <% provide(:title, "新規登録") %>
-<h1 class="mt-5 pt-5 text-center">KEIKOBAにようこそ！</h1>
+<h1 class="mt-5 text-center">KEIKOBAにようこそ！</h1>
 <div class="signup-form">
-  <form action="/examples/actions/confirmation.php" method="post" class="form-horizontal">
+  <%= form_with(model: @user, local: true, class: "form-horizontal") do |f| %>
     <div class="row">
       <div class="col-8 offset-4">
         <h2>KEIKOBAに登録</h2>
       </div>
     </div>
+    <%= render 'shared/error_messages' %>
     <div class="form-group row">
-      <label class="col-form-label col-4">アカウント名</label>
+      <div class="col-form-label col-4">
+        <%= f.label :name, "アカウント名"%>
+      </div>
       <div class="col-8">
-        <input type="text" class="form-control" name="username" required="required" placeholder="KEIKOBAさん">
-      </div>        	
+        <%= f.text_field :name, class: "form-control", placeholder: "KEIKOBAさん" %>
+      </div>  	
     </div>
     <div class="form-group row">
-      <label class="col-form-label col-4">メールアドレス</label>
+      <div class="col-form-label col-4">
+        <%= f.label :email, "メールアドレス" %>
+      </div>
       <div class="col-8">
-        <input type="email" class="form-control" name="email" required="required" placeholder="mail@keikoba.com">
-      </div>        	
-    </div>
-    <div class="form-group row">
-      <label class="col-form-label col-4">パスワード</label>
-      <div class="col-8">
-        <input type="password" class="form-control" name="password" required="required" placeholder="6文字以上">
-      </div>        	
-    </div>
-    <div class="form-group row">
-      <label class="col-form-label col-4">パスワード再入力</label>
-      <div class="col-8">
-        <input type="password" class="form-control" name="confirm_password" required="required" placeholder="">
-      </div>        	
-    </div>
-    <div class="form-group row">
-      <div class="col-8 offset-4">
-        <button type="submit" class="btn btn-primary btn-lg">登録する</button>
-      </div>  
-    </div>		      
-  </form>
+        <%= f.email_field :email, class: "form-control", placeholder: "mail@keikoba.com" %>
+      </div>  	
+      </div>
+      <div class="form-group row">
+        <div class="col-form-label col-4">
+          <%= f.label :password, "パスワード" %>
+        </div>
+        <div class="col-8">
+          <%= f.password_field :password, class: "form-control", placeholder: "6文字以上" %>
+        </div>  	
+      </div>
+      <div class="form-group row">
+        <div class="col-form-label col-4">
+          <%= f.label :password_confirmation, "パスワード再入力" %>
+        </div>
+        <div class="col-8">
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "" %>
+        </div>  	
+      </div>
+      <div class="form-group row">
+        <div class="col-8 offset-4">
+          <%= f.submit "登録する", class: "btn btn-primary btn-lg" %>
+        </div>  
+      </div>
+    <% end %>
 	<div class="text-center"><a href="#">ログインはこちら</a></div>
 </div>
