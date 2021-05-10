@@ -1,0 +1,20 @@
+<% provide(:title, "ログイン") %>
+<div class="login-form">
+  <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+    <h2 class="text-center">ログインする</h2>       
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "mail@keikoba.com" %>
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password, class: "form-control", placeholder: "******" %>
+    </div>
+    <div class="clearfix">
+      <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+    </div>
+    <div class="form-group">
+      <%= f.submit "ログイン", class: "btn btn-primary form-control" %>
+    </div>
+  <% end %>
+</div>
+<p class="text-center">新規登録は<%= link_to "こちら", signup_path, style: "text-decoration: none" %></p>
