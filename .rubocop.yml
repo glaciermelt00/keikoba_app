@@ -20,6 +20,12 @@ AllCops:
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
     - '/Users/glaciermelt/environment/keikoba_app/node_modules/node-sass/src/libsass/extconf.rb'
 
+# モジュール名::クラス名の定義を許可
+ClassAndModuleChildren:
+  Enabled: false
+
+##################### Style ##################################
+
 # 日本語でのコメントを許可
 AsciiComments:
   Enabled: false
@@ -28,13 +34,41 @@ AsciiComments:
 Documentation:
   Enabled: false
 
-# モジュール名::クラス名の定義を許可
-ClassAndModuleChildren:
+# !! のイディオムを許可
+Style/DoubleNegation:
   Enabled: false
 
 # 文字リテラルのイミュータブル宣言を無視（freezeになるのはRuby3以降）
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+# selfが無くても良い時に省略するか。model内において、ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
+Style/RedundantSelf:
+  Enabled: false
+
+##################### Lint ##################################
+
+##################### Metrics ##################################
+
+# 変数の代入(A)、メソッドの呼び出し等(B)、条件分岐(C)から算出される複雑度
+Metrics/AbcSize:
+  Max: 30
+
+# 循環的複雑度 ≒ 分岐の数
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# 1行の文字数
+Metrics/LineLength:
+  Max: 160
+  Exclude:
+    - "db/migrate/*.rb"
+
+# メソッドの行数
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "db/migrate/*.rb"
 
 # RSpec のコードだけ Metrics/BlockLength を無視する
 Metrics/BlockLength:
