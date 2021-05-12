@@ -47,9 +47,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  gem 'pre-commit'
   gem 'rubocop'
   gem 'rubocop-rails'
-  gem 'pre-commit'
 end
 
 group :test do
