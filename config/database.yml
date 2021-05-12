@@ -11,7 +11,7 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: glaciermelt
   password: 'bsjvgPzQPRTpT7zggrWL7HvT'
@@ -49,7 +49,7 @@ test:
 #
 production:
   adapter: mysql2
-  encoding: utf8mb4
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: keikoba_app_production
   username: keikoba_app
