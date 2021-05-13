@@ -1,10 +1,15 @@
 <li class="list-group-item">
   <div class="row">
-    <div class="col-3 mx-auto", style="width: 50px;">
+    <div class="col-4 mx-auto", style="width: 50px;">
       <%= gravatar_for user, size: 50 %>
     </div>
-    <div class="col-9 my-auto">
+    <div class="col-4 my-auto">
       <%= link_to user.name, user, class: "link-secondary", style: "text-decoration: none" %>
+    </div>
+    <div class="col-4 my-auto">
+      <% if current_user.admin? && !current_user?(user) %>
+        <%= link_to "削除する", user, method: :delete, data: { confirm: "削除しますか？" },class: "link-secondary", style: "text-decoration: none" %>
+      <% end %>
     </div>
   </div>
 </li>
