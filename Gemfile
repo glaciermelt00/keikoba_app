@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.7'
 
+gem 'faker'
+gem 'gimei'
+gem 'pagy', '~> 3.5'
 gem 'bcrypt', '3.1.13'
 gem 'bootstrap', '~>5.0.0'
 gem 'jquery-rails'
@@ -61,7 +64,6 @@ group :test do
 
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
 end
 

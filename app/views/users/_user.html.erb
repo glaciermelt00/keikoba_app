@@ -1,0 +1,10 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-3 mx-auto", style="width: 50px;">
+      <%= gravatar_for user, size: 50 %>
+    </div>
+    <div class="col-9 my-auto">
+      <%= link_to user.name, user, class: "link-secondary", style: "text-decoration: none" %>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,15 @@
+<% provide(:title, "ユーザー一覧") %>
+<div class="container">
+  <h1>ユーザー一覧</h1>
+</div>
+<div class="mt-4">
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
+<div class="container">
+  <ul class="lisg-group list-group-flush">
+    <%= render @users %>
+  </ul>
+</div>c
+<div class="mt-4">
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
