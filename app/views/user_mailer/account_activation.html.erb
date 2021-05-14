@@ -7,7 +7,4 @@ KEIKOBA へのご登録ありがとうございます。<br>
 アカウントを有効にするには、下記ボタンをクリックしてください。
 </p>
 
-<button style="background-color: #2B9CFD; border-radius: 30px; border: none;" onmouseover="this.style.backgroundColor='#278DD8'"
-onmouseout="this.style.backgroundColor='#2B9CFD'">
-  <%= link_to "アカウントを有効にする", edit_account_activation_url(@user.activation_token, email: @user.email), style: "text-decoration: none; color: white;" %>
-</button>
+<%= link_to "アカウントを有効にする", edit_account_activation_url(@user.activation_token, email: @user.email) %>
