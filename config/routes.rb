@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'users/guest'
   get 'users/following'
   get 'users/followers'
-  get 'sessions/new'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'  
+  delete 'logout', to: 'sessions#destroy'
+  resources :account_activations, only: [:edit]
 end
