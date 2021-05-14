@@ -6,11 +6,12 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def index
-    @pagy, @users = pagy(User.all)
+    @pagy, @users = pagy(User.where(activated: true))
   end
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated
   end
 
   def new
@@ -20,9 +21,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = 'KEIKOBAへようこそ！'
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = 'アカウントが作成されました！このアカウントを有効にするメールを送信しましたので、ご確認ください。'
+      redirect_to root_url
     else
       render 'new'
     end

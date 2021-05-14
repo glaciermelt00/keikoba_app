@@ -1,0 +1,6 @@
+<%= @user.name %> さん、こんにちは！
+
+KEIKOBA へのご登録ありがとうございます。
+アカウントを有効にするには、下記リンクをクリックしてください。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
