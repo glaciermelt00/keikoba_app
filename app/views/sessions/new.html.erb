@@ -4,11 +4,12 @@
     <h2 class="text-center">ログインする</h2>       
     <div class="form-group login-input">
       <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, class: "form-control", placeholder: "mail@keikoba.com" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "" %>
     </div>
     <div class="form-group login-input">
       <%= f.label :password, "パスワード" %>
-      <%= f.password_field :password, class: "form-control", placeholder: "******" %>
+      <%= f.password_field :password, class: "form-control", placeholder: "" %>
+      <%= link_to "パスワードを忘れた方", new_password_reset_path, class: "text-secondary", style: "text-decoration: none" %>
     </div>
     <div class="clearfix">
       <%= f.label :remember_me, class: "checkbox inline" do %>
