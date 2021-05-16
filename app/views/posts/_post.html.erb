@@ -1,0 +1,15 @@
+<div class="col">
+  <div class="card" style="width: 21rem;" id="post-<%= post.id %>">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.content %></h5>
+      <p class="card-text"><%= post.content %></p>
+      <p class="card-text">投稿日：<%= post.created_at.strftime('%Y年%m月%d日') %></p>
+      <a href="#" class="btn btn-primary">編集する</a>
+    </div>
+    <div>
+      <%= link_to gravatar_for(post.user, size: 50), post.user %>
+      <%= link_to post.user.name, post.user %>
+    </div>
+  </div>
+</div>

@@ -25,5 +25,8 @@ module KeikobaApp
                         request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
+    # タイムゾーンを日本時間に設定
+    config.time_zone = 'Asia/Tokyo'
   end
 end
