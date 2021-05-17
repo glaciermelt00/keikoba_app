@@ -7,7 +7,7 @@
         <h2>KEIKOBAに登録</h2>
       </div>
     </div>
-    <%= render 'shared/error_messages' %>
+    <%= render 'shared/error_messages', object: f.object %>
     <div class="form-group row">
       <div class="col-form-label col-4">
         <%= f.label :name, "アカウント名"%>

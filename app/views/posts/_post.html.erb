@@ -3,9 +3,9 @@
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title"><%= post.content %></h5>
-      <p class="card-text"><%= post.content %></p>
-      <p class="card-text">投稿日：<%= post.created_at.strftime('%Y年%m月%d日') %></p>
+      <p class="card-text">投稿日 <%= l post.created_at %></p>
       <a href="#" class="btn btn-primary">編集する</a>
+      <%= link_to '削除する', post, method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger' %>
     </div>
     <div>
       <%= link_to gravatar_for(post.user, size: 50), post.user %>

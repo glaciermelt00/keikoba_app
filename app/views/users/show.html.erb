@@ -3,7 +3,7 @@
 <%= render 'users/user_nav' %>
 <div class="mt-4">
   <% if @user.posts.any?%>
-    <h3>投稿(<%= @user.posts.count %>)</h3>
+    <h3>投稿 (<%= @user.posts.count %>件)</h3>
     <div class="row row-cols-1 row-cols-md-2 g-4">
       <%= render @posts %>
     </div>

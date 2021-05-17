@@ -8,7 +8,7 @@
   <body class="d-flex flex-column h-100">
     <%= render 'layouts/header' %>
     <main class="flex-shrink-0">
-      <div class="container pad-adjust">
+      <div class="container pad-adjust mt-5 pt-3">
         <% flash.each do |message_type, message| %>
           <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
         <% end %>

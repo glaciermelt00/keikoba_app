@@ -2,7 +2,7 @@
 <h1 class="mt-5 text-center">アカウント設定</h1>
 <div class="signup-form">
   <%= form_with(model: @user, local: true, class: "form-horizontal") do |f| %>
-    <%= render 'shared/error_messages' %>
+    <%= render 'shared/error_messages', object: f.object %>
     <div class="mx-auto mb-2", style="width: 110px;" >
       <a href="#" target="_blank" rel="noopener" class="fas fa-user-circle fa-7x" style="text-decoration: none;"></a>
     </div>

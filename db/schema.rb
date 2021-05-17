@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_134956) do
+ActiveRecord::Schema.define(version: 2021_05_17_085611) do
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "address"
+    t.integer "fee"
+    t.string "available_time"
+    t.string "holiday"
+    t.string "phone_number"
+    t.string "url"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
