@@ -31,5 +31,8 @@ module KeikobaApp
 
     # デフォルトのロケールを日本(ja)に設定
     config.i18n.default_locale = :ja
+
+    # config/locales以下のディレクトリ内の全てのymlファイルを読み込む
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
   end
 end
