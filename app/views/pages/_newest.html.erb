@@ -1,0 +1,23 @@
+<div class="col-md-4 mb-3">
+  <div class="card">
+    <div class="card-img-top">
+      <% if newest.images.attached? %>
+        <%= image_tag newest.display_image, class: "img-fluid" %>
+      <% else %>
+        <img src="..." class="" alt="...">
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title"><%= newest.content %></h4>
+      <div class="pt-3 row">
+        <div class="col-4">
+          <%= link_to gravatar_for(newest.user, size: 50), newest.user %>
+        </div>
+        <div class="col">
+          <%= link_to newest.user.name, newest.user %>
+          <p class="text-secondary"><%= time_ago_in_words(newest.created_at) %>前</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

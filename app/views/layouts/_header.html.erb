@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <%= link_to "", root_path, class: "fas fa-vihara  navbar-brand" %>
       <%= link_to "KEIKOBA", root_path, class: "navbar-brand" %>
@@ -32,7 +32,7 @@
               <a class="nav-link fas fa-bell fa-lg text-secondary" href="#"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fas fa-edit fa-lg text-secondary" href="#"></a>
+              <%= link_to "", new_post_path, class: "nav-link fas fa-edit fa-lg text-secondary" %>
             </li>
             <li class="nav-item dropdown dropstart">
               <a class="nav-link fas fa-user fa-lg text-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>

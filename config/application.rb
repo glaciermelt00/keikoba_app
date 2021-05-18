@@ -25,5 +25,14 @@ module KeikobaApp
                         request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
+    # タイムゾーンを日本時間に設定
+    config.time_zone = 'Asia/Tokyo'
+
+    # デフォルトのロケールを日本(ja)に設定
+    config.i18n.default_locale = :ja
+
+    # config/locales以下のディレクトリ内の全てのymlファイルを読み込む
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
   end
 end

@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated
+
+    @pagy, @posts = pagy(@user.posts.all)
   end
 
   def new
@@ -60,14 +62,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  # ログイン済みユーザーかどうか確認
-  def logged_in_user
-    return if logged_in?
-
-    store_location
-    flash[:danger] = 'ログインしてください'
-    redirect_to login_url
-  end
+  # beforeフィルター
 
   # 正しいユーザーかどうか確認
   def correct_user

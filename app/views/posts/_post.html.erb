@@ -1,0 +1,25 @@
+<div class="col">
+  <div class="card" style="width: 21rem;" id="post-<%= post.id %>">
+    <div class="card-img-top">
+      <% if post.images.attached? %>
+        <%= image_tag post.display_image, class: "img-fluid" %>
+      <% else %>
+        <img src="..." class="" alt="...">
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= post.content %></h5>
+      <a href="#" class="btn btn-primary">編集する</a>
+      <%= link_to '削除する', post, method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger' %>
+      <div class="pt-3 row">
+        <div class="col-2">
+          <%= link_to gravatar_for(post.user, size: 50), post.user %>
+        </div>
+        <div class="col">
+          <%= link_to post.user.name, post.user %>
+          <p class="text-secondary"><%= time_ago_in_words(post.created_at) %>前</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
