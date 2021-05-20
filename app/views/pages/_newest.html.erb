@@ -8,7 +8,12 @@
       <% end %>
     </div>
     <div class="card-body">
-      <h4 class="card-title"><%= newest.content %></h4>
+      <%= link_to newest.name, newest, class: "h4 card-title text-dark", style: "text-decoration: none" %>
+      <div class="row mt-3">
+        <div class="col-12">
+          <%= render 'shared/favorites', post: newest  %>
+        </div>
+      </div>
       <div class="pt-3 row">
         <div class="col-4">
           <%= link_to gravatar_for(newest.user, size: 50), newest.user %>

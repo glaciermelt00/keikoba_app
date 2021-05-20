@@ -4,22 +4,19 @@
       <div class="col-8">
         <h2><%= @post.name %></h2>
       </div>
-      <div class="col">
+      <div class="col-4">
         <button type="button" class="btn btn-primary">編集する</button>
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-3">
-        <span>お気に入り XX</span>
-      </div>
-      <div class="col-3">
-        <span>ブックマーク XX</span>
+      <div class="col-12">
+        <%= render 'shared/favorites', post: @post %>
       </div>
     </div>
     <div class="row mt-3">
       <div class="col">
         <%= gravatar_for @post.user, size: 24 %>
-        <%= @post.user.name, class: "" %>
+        <%= @post.user.name %>
       </div>
     </div>
   </div>
