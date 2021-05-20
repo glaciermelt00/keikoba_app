@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     redirect_to root_url and return unless @user.activated
 
     @pagy, @posts = pagy(@user.posts.all)
+    @pagy, @favorites = pagy(@user.favorites.all)
   end
 
   def new
