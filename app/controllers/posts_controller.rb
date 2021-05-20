@@ -17,6 +17,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find_by(params[:id])
+  end
+
   def destroy
     @post.destroy
     flash[:success] = '投稿が削除されました'

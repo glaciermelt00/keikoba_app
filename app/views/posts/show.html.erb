@@ -1,0 +1,48 @@
+<% provide(:title, @post.name) %>
+<%= render 'posts/post_header' %>
+
+<div class="container pt-5">
+  <div class="row g-3">
+    <div class="col-10 offset-1">
+      <% if @post.images.attached? %>
+        <%= image_tag @post.display_image, class: "img-fluid mb-5" %>
+      <% end %>
+      <table class="table table-sm table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row">名称</th>
+            <td><%= @post.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">住所</th>
+            <td><%= @post.address %></td>
+          </tr>
+          <tr>
+            <th scope="row">料金</th>
+            <td><%= @post.fee %></td>
+          </tr>
+          <tr>
+            <th scope="row">時間帯</th>
+            <td><%= @post.available_time %></td>
+          </tr>
+          <tr>
+            <th scope="row">休日</th>
+            <td><%= @post.holiday %></td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @post.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">URL</th>
+            <td><%= @post.url %></td>
+          </tr>
+          <tr>
+            <th scope="row">備考</th>
+            <td><%= @post.content %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
