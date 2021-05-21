@@ -13,8 +13,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated
 
-    @pagy, @posts = pagy(@user.posts.all)
-    @pagy, @favorite_posts = pagy(@user.favorite_posts)
+    @pagy_posts, @posts = pagy(@user.posts, page_param: :page_posts)
+    @pagy_favorite_posts, @favorite_posts = pagy(@user.favorite_posts, page_param: :page_favorite_posts)
   end
 
   def new
