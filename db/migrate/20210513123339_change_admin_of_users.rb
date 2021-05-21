@@ -1,9 +1,11 @@
 class ChangeAdminOfUsers < ActiveRecord::Migration[6.0]
   def up
-    change_column :users, :admin, :boolean, default: false
+    change_index :favorites, [:post_id], unique: true
+    change_index :favorites, [:user_id], unique: true
   end
 
   def down 
-    change_column :users, :admin, :boolean
+    change_index :favorites, [:post_id]
+    change_index :favorites, [:user_id]
   end
 end

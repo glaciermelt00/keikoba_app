@@ -3,13 +3,13 @@
 <%= render 'users/user_nav' %>
 <div class="mt-4 tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-    <%= render 'users/user_post' %>
+    <%= render 'users/user_posts' %>
   </div>
   <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
     コメント一覧
   </div>
   <div class="tab-pane fade" id="nav-favorite" role="tabpanel" aria-labelledby="nav-favorite-tab">
-    お気に入り一覧
+    <%= render 'users/user_favorite_posts' %>
   </div>
   <div class="tab-pane fade" id="nav-bookmark" role="tabpanel" aria-labelledby="nav-bookmark-tab">
     ブックマーク一覧
