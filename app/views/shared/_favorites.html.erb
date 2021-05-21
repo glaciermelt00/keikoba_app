@@ -1,4 +1,4 @@
-<% if !Favorite.exists?(user_id: current_user.id, post_id: post.id) %>
+<% if current_user && !Favorite.exists?(user_id: current_user.id, post_id: post.id) %>
   <%= link_to "", post_favorites_path(post), method: :post, remote:true, class: "far  fa-heart text-dark", style: "font-size: 20px; text-decoration: none;" %>
   <span class="" style="font-size: 20px; font-weight: normal;"><%= post.favorites.length %></span> 
 <% else %>
