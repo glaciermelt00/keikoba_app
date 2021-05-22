@@ -1,0 +1,7 @@
+<% if current_user && !Bookmark.exists?(user_id: current_user.id, post_id: post.id) %>
+  <%= link_to "", post_bookmarks_path(post), method: :post, remote:true, class: "far  fa-bookmark text-dark", style: "font-size: 20px; text-decoration: none;" %>
+  <span class="" style="font-size: 20px; font-weight: normal;"><%= post.bookmarks.length %></span> 
+<% else %>
+  <%= link_to "", post_bookmarks_path(post), method: :delete, remote:true, class: "fas fa-bookmark text-dark", style: "font-size: 20px; text-decoration: none" %>
+  <span class="" style="font-size: 20px; font-weight: normal;"><%= post.bookmarks.length %></span> 
+<% end %>

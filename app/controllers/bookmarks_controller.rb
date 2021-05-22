@@ -1,15 +1,15 @@
-class FavoritesController < ApplicationController
+class BookmarksController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user
 
   def create
-    @favorite = Favorite.new(user_id: current_user.id, post_id: @post.id)
-    redirect_to request.referer if @favorite.save
+    @bookmark = Bookmark.new(user_id: current_user.id, post_id: @post.id)
+    redirect_to request.referer if @bookmark.save
   end
 
   def destroy
-    @favorite = Favorite.find_by(user_id: current_user.id, post_id: @post.id)
-    @favorite.destroy
+    @bookmark = Bookmark.find_by(user_id: current_user.id, post_id: @post.id)
+    @bookmark.destroy
     redirect_to request.referer
   end
 
