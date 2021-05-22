@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
     @pagy_posts, @posts = pagy(@user.posts, page_param: :page_posts)
     @pagy_favorite_posts, @favorite_posts = pagy(@user.favorite_posts, page_param: :page_favorite_posts)
+    @pagy_bookmark_posts, @bookmark_posts = pagy(@user.bookmark_posts, psge_param: :page_bookmark_posts)
   end
 
   def new
