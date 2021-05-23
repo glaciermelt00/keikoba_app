@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :logged_in_user, only: %i[new create destroy]
   before_action :correct_user, only: :destroy
+  before_action :set_post, only: %i[show edit update]
 
   def new
     @post = current_user.posts.build
@@ -17,8 +18,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find(params[:id])
+  def show; end
+
+  def edit; end
+
+  def update
+    if @post.update(post_params)
+      flash[:success] = '記事を更新しました！'
+      redirect_to @post
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -37,5 +47,10 @@ class PostsController < ApplicationController
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to root_url if @post.nil?
+  end
+
+  # show/edit/updateで@postを事前に仕込んでおく（リファクタリング）
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
