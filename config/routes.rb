@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
+  root 'pages#index'
   get 'signup', to: 'users#new'
   get 'users/guest'
   get 'users/following'
