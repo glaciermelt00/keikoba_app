@@ -21,7 +21,7 @@ RSpec.describe Post, type: :model do
   end
 
   context '複数のpostが保存された場合' do
-    before do 
+    before do
       @most_recent_post = FactoryBot.create(:most_recent_post)
       FactoryBot.create_list(:post, 3)
     end
