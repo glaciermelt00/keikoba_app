@@ -1,13 +1,11 @@
 FactoryBot.define do
   factory :post do
-    sequence(:name)       { |n| "test#{n}@example.com" }
-    user_id               { 1 }
+    sequence(:name)       { |n| "Dojo ##{n}" }
     sequence(:created_at) { |n| n.days.ago }
-  end
+    association :user
 
-  factory :most_recent_post, class: Post do
-    name        { 'test@example.com' }
-    user_id     { 1 }
-    created_at  { Time.zone.now }
+    factory :most_recent_post do
+      created_at  { Time.zone.now }
+    end
   end
 end
