@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   before(:each) do
     @user = FactoryBot.create(:user)
-    @another_user = FactoryBot.create(:another_user)
+    @another_user = FactoryBot.create(:user)
   end
 
   describe 'GET /signup' do

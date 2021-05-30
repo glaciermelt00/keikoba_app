@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Bookmark, type: :model do
   before(:each) do
-    @user = FactoryBot.create(:user)
-    @another_user = FactoryBot.create(:another_user)
-    @post = FactoryBot.create(:post)
+    @post = create(:post)
+    @another_user = create(:user)
     @bookmark = Bookmark.new(user_id: @another_user.id, post_id: @post.id)
   end
 
