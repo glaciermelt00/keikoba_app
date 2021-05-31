@@ -16,14 +16,14 @@ RSpec.describe Bookmark, type: :model do
   it 'is invalid without user_id' do
     @bookmark.user_id = nil
     @bookmark.valid?
-    expect(@bookmark.errors[:user_id]).to include("を入力してください")
+    expect(@bookmark.errors[:user_id]).to include('を入力してください')
   end
 
   # post_idがnilなら、無効な状態であること
   it 'is invalid without post_id' do
     @bookmark.post_id = nil
     @bookmark.valid?
-    expect(@bookmark.errors[:post_id]).to include("を入力してください")
+    expect(@bookmark.errors[:post_id]).to include('を入力してください')
   end
 
   # 重複したbookmarkなら、無効な状態であること
@@ -31,5 +31,6 @@ RSpec.describe Bookmark, type: :model do
     duplicate_bookmark = @bookmark.dup
     @bookmark.save
     duplicate_bookmark.valid?
-    expect(duplicate_bookmark.errors[:post_id]).to include("はすでに存在します")  end
+    expect(duplicate_bookmark.errors[:post_id]).to include('はすでに存在します')
+  end
 end

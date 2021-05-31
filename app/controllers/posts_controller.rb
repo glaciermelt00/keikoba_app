@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: %i[new create destroy]
-  before_action :correct_user, only: :destroy
-  before_action :set_post, only: %i[show edit update]
+  before_action :logged_in_user, except: %i[show index]
+  before_action :post_owner, only: %i[edit update destroy]
 
   def new
     @post = current_user.posts.build
@@ -18,7 +17,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def index; end
 
   def edit; end
 
@@ -44,13 +47,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:name, :address, :fee, :available_time, :holiday, :phone_number, :url, :content, images: [])
   end
 
-  def correct_user
-    @post = current_user.posts.find_by(id: params[:id])
-    redirect_to root_url if @post.nil?
-  end
-
-  # show/edit/updateで@postを事前に仕込んでおく（リファクタリング）
-  def set_post
+  def post_owner
     @post = Post.find(params[:id])
+    redirect_to(root_url) unless @post.user == current_user
   end
 end

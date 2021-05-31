@@ -6,7 +6,15 @@ FactoryBot.define do
     password_confirmation { 'password' }
 
     trait :do_remember do
-      after(:create) { |user| user.remember }
+      after(:create, &:remember)
+    end
+
+    trait :invalid do
+      name { nil }
+    end
+
+    trait :do_activate do
+      after(:create, &:activate)
     end
   end
 end
