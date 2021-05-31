@@ -12,14 +12,14 @@ RSpec.describe Post, type: :model do
     @post = create(:post)
     @post.user_id = nil
     @post.valid?
-    expect(@post.errors[:user_id]).to include("を入力してください")
+    expect(@post.errors[:user_id]).to include('を入力してください')
   end
 
   # nameが空白なら、無効な状態であること
   it 'is invalid with a blank name' do
     @post = build(:post, name: ' ')
     @post.valid?
-    expect(@post.errors[:name]).to include("を入力してください")
+    expect(@post.errors[:name]).to include('を入力してください')
   end
 
   # postはcreated_atの降順で並んでいる

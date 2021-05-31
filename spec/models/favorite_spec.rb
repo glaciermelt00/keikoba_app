@@ -16,14 +16,14 @@ RSpec.describe Favorite, type: :model do
   it 'is invalid without user_id' do
     @favorite.user_id = nil
     @favorite.valid?
-    expect(@favorite.errors[:user_id]).to include("を入力してください")
+    expect(@favorite.errors[:user_id]).to include('を入力してください')
   end
 
   # post_idがnilなら、無効な状態であること
   it 'is invalid without post_id' do
     @favorite.post_id = nil
     @favorite.valid?
-    expect(@favorite.errors[:post_id]).to include("を入力してください")
+    expect(@favorite.errors[:post_id]).to include('を入力してください')
   end
 
   # 重複したfavoriteなら、無効な状態であること
@@ -31,6 +31,6 @@ RSpec.describe Favorite, type: :model do
     duplicate_favorite = @favorite.dup
     @favorite.save
     duplicate_favorite.valid?
-    expect(duplicate_favorite.errors[:post_id]).to include("はすでに存在します")
+    expect(duplicate_favorite.errors[:post_id]).to include('はすでに存在します')
   end
 end

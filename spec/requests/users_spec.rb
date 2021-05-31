@@ -59,8 +59,8 @@ RSpec.describe 'Users', type: :request do
       log_in_as(@another_user)
       expect(@another_user).to_not be_admin
       patch user_path(@another_user), params: { user: {
-        password: 'password', 
-        password_confirmation: 'password', 
+        password: 'password',
+        password_confirmation: 'password',
         admin: true
       } }
       expect(@another_user.reload).to_not be_admin

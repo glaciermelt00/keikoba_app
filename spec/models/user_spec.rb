@@ -12,21 +12,21 @@ RSpec.describe User, type: :model do
     it 'is invalid with a blank name' do
       @user = build(:user, name: '  ')
       @user.valid?
-      expect(@user.errors[:name]).to include("を入力してください")
+      expect(@user.errors[:name]).to include('を入力してください')
     end
 
     # nameが3文字未満なら、無効な状態であること
     it 'is invalid with a name less than 3 characters' do
       @user = build(:user, name: 'a' * 2)
       @user.valid?
-      expect(@user.errors[:name]).to include("は3文字以上で入力してください")
+      expect(@user.errors[:name]).to include('は3文字以上で入力してください')
     end
 
     # nameが50文字を超えるなら、無効な状態であること
     it 'is invalid for a name more than 50 characters' do
       @user = build(:user, name: 'a' * 51)
       @user.valid?
-      expect(@user.errors[:name]).to include("は50文字以内で入力してください")
+      expect(@user.errors[:name]).to include('は50文字以内で入力してください')
     end
   end
 
@@ -35,14 +35,14 @@ RSpec.describe User, type: :model do
     it 'is invalid with a blank email' do
       @user = build(:user, email: '   ')
       @user.valid?
-      expect(@user.errors[:email]).to include("を入力してください")
+      expect(@user.errors[:email]).to include('を入力してください')
     end
 
     # emailが255文字を超えると、無効な状態であること
     it 'is invalid for a email more than 255 characters' do
       @user = build(:user, email: format('%s@example.com', ('a' * 244)))
       @user.valid?
-      expect(@user.errors[:email]).to include("は255文字以内で入力してください")
+      expect(@user.errors[:email]).to include('は255文字以内で入力してください')
     end
 
     # フォーマットに合致するemailなら、有効な状態であること
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
       invalid_addresses.each do |invalid_address|
         @user.email = invalid_address
         @user.valid?
-        expect(@user.errors[:email]).to include("は不正な値です")
+        expect(@user.errors[:email]).to include('は不正な値です')
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe User, type: :model do
       @user = create(:user)
       duplicate_user = @user.dup
       duplicate_user.valid?
-      expect(duplicate_user.errors[:email]).to include("はすでに存在します")
+      expect(duplicate_user.errors[:email]).to include('はすでに存在します')
     end
 
     # DBに保存されたemailは小文字であること
@@ -86,14 +86,14 @@ RSpec.describe User, type: :model do
   it 'is invalid with a blank password' do
     @user = build(:user, password: ' ' * 6, password_confirmation: ' ' * 6)
     @user.valid?
-    expect(@user.errors[:password]).to include("を入力してください")
+    expect(@user.errors[:password]).to include('を入力してください')
   end
 
   # passwordが6文字未満なら、無効な状態であること
   it 'is invalid for a password less than 6 characters' do
     @user = build(:user, password: 'a' * 5, password_confirmation: 'a' * 5)
     @user.valid?
-    expect(@user.errors[:password]).to include("は6文字以上で入力してください")
+    expect(@user.errors[:password]).to include('は6文字以上で入力してください')
   end
 
   # rememberメソッドを呼び出すと、remember_digestが上書きされる
@@ -123,15 +123,13 @@ RSpec.describe User, type: :model do
 
   # activateメソッドで、activatedがtrueに上書きされる
   it 'updates activated to true with activate method' do
-    @user = create(:user)
-    @user.activate
+    @user = create(:user, :do_activate)
     expect(@user.activated).to be true
   end
 
   # activateメソッドで、activated_atが現在時刻に上書きされる
   it 'updates activated_at to present time with activate method' do
-    @user = create(:user)
-    @user.activate
+    @user = create(:user, :do_activate)
     expect(@user.activated_at).to_not be_nil
   end
 
