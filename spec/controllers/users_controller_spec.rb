@@ -79,7 +79,7 @@ RSpec.describe UsersController, type: :controller do
     # 認可されたユーザーとして
     context 'as an authorized user' do
       before do
-        @user = create(:user)
+        @user = create(:user, :do_activate)
       end
 
       # 正常にレスポンスを返すこと
@@ -117,6 +117,12 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to have_http_status '302'
       end
 
+      # dangerフラッシュメッセージが出力すること
+      it 'prints danger flash message' do
+        get :edit, params: { id: @other_user.id }
+        expect(flash[:danger]).to eq 'ログインしてください'
+      end
+
       # ログイン画面にリダイレクトすること
       it 'redirects to the login page' do
         get :edit, params: { id: @other_user.id }
@@ -144,8 +150,8 @@ RSpec.describe UsersController, type: :controller do
     # 認可されていないユーザーとして
     context 'as an unauthorized user' do
       before do
-        @user = create(:user)
-        @other_user = create(:user, name: 'Same Old Name')
+        @user = create(:user, :do_activate)
+        @other_user = create(:user, :do_activate, name: 'Same Old Name')
       end
 
       # ユーザー情報を更新できないこと
@@ -154,6 +160,14 @@ RSpec.describe UsersController, type: :controller do
         log_in_as @user
         patch :update, params: { id: @other_user.id, user: user_params }
         expect(@other_user.reload.name).to eq 'Same Old Name'
+      end
+
+      # web経由ではadmin属性をtrueにできない
+      it ' cannot change admin attribute to true' do
+        user_params = attributes_for(:user, admin: true)
+        log_in_as @other_user
+        patch :update, params: { id: @other_user.id, user: user_params }
+        expect(@other_user.reload.admin).to_not be true
       end
 
       # rootへリダイレクトすること
@@ -176,6 +190,13 @@ RSpec.describe UsersController, type: :controller do
         user_params = attributes_for(:user)
         patch :update, params: { id: @other_user.id, user: user_params }
         expect(response).to have_http_status '302'
+      end
+
+      # dangerフラッシュメッセージが出力すること
+      it 'prints danger flash message' do
+        user_params = attributes_for(:user)
+        patch :update, params: { id: @other_user.id, user: user_params }
+        expect(flash[:danger]).to eq 'ログインしてください'
       end
 
       # ログイン画面にリダイレクトすること

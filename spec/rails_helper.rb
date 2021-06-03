@@ -7,6 +7,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_bot'
+require 'capybara/rspec'
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -69,25 +70,4 @@ RSpec.configure do |config|
 
   # FactoryBotの利用をON
   config.include FactoryBot::Syntax::Methods
-
-  # DatabaseCleanerの設定
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-  config.before(:all) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:all) do
-    DatabaseCleaner.clean
-  end
 end
