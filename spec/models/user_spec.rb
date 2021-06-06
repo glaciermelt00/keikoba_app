@@ -1,50 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  subject(:user) { build(:user, password: '', password_confirmation: '') }
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_length_of(:name).is_at_least(3).is_at_most(50) }
+  it { is_expected.to validate_presence_of :email }
+  it { is_expected.to validate_length_of(:email).is_at_most(255) }
+  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  it { is_expected.to have_secure_password :password }
+  it { is_expected.to validate_presence_of :password }
+  it { is_expected.to validate_length_of(:password).is_at_least(6) }
+  it { is_expected.to have_many(:posts).dependent(:destroy) }
+  it { is_expected.to have_many(:favorites).dependent(:destroy) }
+  it { is_expected.to have_many(:favorite_posts).through(:favorites).source(:post) }
+  it { is_expected.to have_many(:bookmarks).dependent(:destroy) }
+  it { is_expected.to have_many(:bookmark_posts).through(:bookmarks).source(:post) }
+
   # name, email, passwordがあれば、有効な状態であること
   it 'is valid with a name, email, and password' do
     @user = build(:user)
     expect(@user).to be_valid
   end
 
-  describe 'name' do
-    # nameが空白なら、無効な状態であること
-    it 'is invalid with a blank name' do
-      @user = build(:user, name: '  ')
-      @user.valid?
-      expect(@user.errors[:name]).to include('を入力してください')
-    end
-
-    # nameが3文字未満なら、無効な状態であること
-    it 'is invalid with a name less than 3 characters' do
-      @user = build(:user, name: 'a' * 2)
-      @user.valid?
-      expect(@user.errors[:name]).to include('は3文字以上で入力してください')
-    end
-
-    # nameが50文字を超えるなら、無効な状態であること
-    it 'is invalid for a name more than 50 characters' do
-      @user = build(:user, name: 'a' * 51)
-      @user.valid?
-      expect(@user.errors[:name]).to include('は50文字以内で入力してください')
-    end
-  end
-
   describe 'email' do
-    # emailが空白なら、無効な状態であること
-    it 'is invalid with a blank email' do
-      @user = build(:user, email: '   ')
-      @user.valid?
-      expect(@user.errors[:email]).to include('を入力してください')
-    end
-
-    # emailが255文字を超えると、無効な状態であること
-    it 'is invalid for a email more than 255 characters' do
-      @user = build(:user, email: format('%s@example.com', ('a' * 244)))
-      @user.valid?
-      expect(@user.errors[:email]).to include('は255文字以内で入力してください')
-    end
-
     # フォーマットに合致するemailなら、有効な状態であること
     it 'is valid with an email that matches the format ' do
       @user = build(:user)
@@ -66,34 +44,12 @@ RSpec.describe User, type: :model do
       end
     end
 
-    # 重複したemailなら、無効な状態であること
-    it 'is invalid with a duplicate email ' do
-      @user = create(:user)
-      duplicate_user = @user.dup
-      duplicate_user.valid?
-      expect(duplicate_user.errors[:email]).to include('はすでに存在します')
-    end
-
     # DBに保存されたemailは小文字であること
     it 'makes email downcase when user is saved to DB' do
       mixed_case_email = 'Foo@ExAMPle.CoM'
       @user = create(:user, email: mixed_case_email)
       expect(mixed_case_email.downcase).to eq @user.email
     end
-  end
-
-  # passwordが空白なら、無効な状態であること
-  it 'is invalid with a blank password' do
-    @user = build(:user, password: ' ' * 6, password_confirmation: ' ' * 6)
-    @user.valid?
-    expect(@user.errors[:password]).to include('を入力してください')
-  end
-
-  # passwordが6文字未満なら、無効な状態であること
-  it 'is invalid for a password less than 6 characters' do
-    @user = build(:user, password: 'a' * 5, password_confirmation: 'a' * 5)
-    @user.valid?
-    expect(@user.errors[:password]).to include('は6文字以上で入力してください')
   end
 
   # rememberメソッドを呼び出すと、remember_digestが上書きされる
@@ -169,30 +125,5 @@ RSpec.describe User, type: :model do
     expect(@user.activation_digest).to be_nil
     @user.save
     expect(@user.activation_digest).to_not be_nil
-  end
-
-  # userが削除された場合
-  describe 'if user is deleted' do
-    before do
-      @post = create(:post)
-      @another_user = create(:user)
-    end
-
-    # 関連付けられたpostが削除される
-    it 'associated post is deleted' do
-      expect { @post.user.destroy }.to change { Post.count }.from(1).to(0)
-    end
-
-    # 関連付けられたFavorite_postが削除される
-    it 'associated favorite_post is deleted' do
-      Favorite.create!(user_id: @another_user.id, post_id: @post.id)
-      expect { @post.user.destroy }.to change { Favorite.count }.from(1).to(0)
-    end
-
-    # 関連付けられたbookmark_postが削除される
-    it 'associated bookmark_post is deleted' do
-      Bookmark.create!(user_id: @another_user.id, post_id: @post.id)
-      expect { @post.user.destroy }.to change { Bookmark.count }.from(1).to(0)
-    end
   end
 end
