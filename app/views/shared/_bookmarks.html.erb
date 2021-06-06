@@ -1,7 +1,13 @@
-<% if current_user && !Bookmark.exists?(user_id: current_user.id, post_id: post.id) %>
-  <%= link_to "", post_bookmarks_path(post), method: :post, remote:true, class: "far  fa-bookmark text-dark", style: "font-size: 20px; text-decoration: none;" %>
-  <span class="" style="font-size: 20px; font-weight: normal;"><%= post.bookmarks.length %></span> 
-<% else %>
-  <%= link_to "", post_bookmarks_path(post), method: :delete, remote:true, class: "fas fa-bookmark text-dark", style: "font-size: 20px; text-decoration: none" %>
-  <span class="" style="font-size: 20px; font-weight: normal;"><%= post.bookmarks.length %></span> 
-<% end %>
+<% bookmark_shape = Bookmark.exists?(post_id: post.id) ? 'fas fa-bookmark' : 'far fa-bookmark' %>
+<% send_type =
+    if current_user == post.user
+      ''
+    elsif Bookmark.exists?(post_id: post.id)
+      :delete
+    else
+      :post
+    end  %>
+<% link_disable = (send_type == '') ? 'pointer-events:none;' : '' %>
+
+<%= link_to "", post_bookmarks_path(post), method: send_type, remote:true, class: "#{bookmark_shape} text-dark", style: "font-size: 20px; text-decoration: none;" %>
+<span class="" style="font-size: 20px; font-weight: normal; #{link_disable}"><%= post.bookmarks.length%></span>
