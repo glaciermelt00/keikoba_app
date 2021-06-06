@@ -1,5 +1,5 @@
+<h3>お気に入り (<%= @user.favorite_posts.count %>件)</h3>
 <% if @user.favorite_posts.any?%>
-  <h3>お気に入り (<%= @user.favorite_posts.count %>件)</h3>
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <%= render @favorite_posts %>
   </div>
