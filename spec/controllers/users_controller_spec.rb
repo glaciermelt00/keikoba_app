@@ -1,17 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  # let(:user) { create(:user, :do_activate) }
+  let(:user_params) { attributes_for(:user) }
+
+  it { is_expected.to use_before_action :logged_in_user}
+  it { is_expected.to use_before_action :correct_user}
+  it { is_expected.to use_before_action :admin_user}
+  it { is_expected.to permit(:name, :email, :password, :password_confirmation).for(:create, params: { user: user_params } ) }
+  # it { is_expected.to permit(:name, :email, :password, :password_confirmation).for(:update, params: { id: user.id, user: user_params } ) }
+
   describe '#new' do
     # 正常にレスポンスを返すこと
     it 'responds successfully' do
       get :new
-      expect(response).to be_successful
-    end
-
-    # 200レスポンスを返すこと
-    it 'returns a 200 response' do
-      get :new
-      expect(response).to have_http_status '200'
+      aggregate_failures do
+        expect(response).to be_successful
+        expect(response).to have_http_status '200'
+      end
     end
   end
 
@@ -20,7 +26,6 @@ RSpec.describe UsersController, type: :controller do
     context 'with valid attributes' do
       # ユーザーを追加できること
       it 'adds a user' do
-        user_params = attributes_for(:user)
         expect do
           post :create, params: { user: user_params }
         end.to change(User, :count).by(1)
@@ -40,50 +45,37 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#show' do
-    before do
-      @user = create(:user, :do_activate)
-    end
-
     # 正常にレスポンスを返すこと
     it 'responds successfully' do
+      @user = create(:user, :do_activate)
       get :show, params: { id: @user.id }
-      expect(response).to be_successful
-    end
 
-    # 200レスポンスを返すこと
-    it 'returns a 200 response' do
-      get :show, params: { id: @user.id }
-      expect(response).to have_http_status '200'
+      aggregate_failures do
+        expect(response).to be_successful
+        expect(response).to have_http_status '200'
+      end
     end
   end
 
   describe '#index' do
-    before do
-      @user = create(:user, :do_activate)
-    end
-
     # 正常にレスポンスを返すこと
     it 'responds successfully' do
+      @user = create(:user, :do_activate)
       get :index
-      expect(response).to be_successful
-    end
 
-    # 200レスポンスを返すこと
-    it 'returns a 200 response' do
-      get :index
-      expect(response).to have_http_status '200'
+      aggregate_failures do
+        expect(response).to be_successful
+        expect(response).to have_http_status '200'
+      end
     end
   end
 
   describe '#edit' do
     # 認可されたユーザーとして
     context 'as an authorized user' do
-      before do
-        @user = create(:user, :do_activate)
-      end
-
       # 正常にレスポンスを返すこと
       it 'responds successfully' do
+        @user = create(:user, :do_activate)
         log_in_as @user
         get :edit, params: { id: @user.id }
         expect(response).to be_successful
@@ -92,13 +84,10 @@ RSpec.describe UsersController, type: :controller do
 
     # 認可されていないユーザーとして
     context 'as an unauthorized user' do
-      before do
-        @user = create(:user)
-        @other_user = create(:user)
-      end
-
       # rootにリダイレクトすること
       it 'redirects to root' do
+        @user = create(:user)
+        @other_user = create(:user)
         log_in_as @user
         get :edit, params: { id: @other_user.id }
         expect(response).to redirect_to root_path
@@ -107,26 +96,16 @@ RSpec.describe UsersController, type: :controller do
 
     # ゲストとして
     context 'as a guest' do
-      before do
+      # 302レスポンスを返し、dangerフラッシュメッセージが出力し、ログイン画面にリダイレクトすること
+      it 'returns a 302 response & prints danger flash message & redirects to login page' do
         @other_user = create(:user)
-      end
-
-      # 302レスポンスを返すこと
-      it 'returns a 302 response' do
         get :edit, params: { id: @other_user.id }
-        expect(response).to have_http_status '302'
-      end
 
-      # dangerフラッシュメッセージが出力すること
-      it 'prints danger flash message' do
-        get :edit, params: { id: @other_user.id }
-        expect(flash[:danger]).to eq 'ログインしてください'
-      end
-
-      # ログイン画面にリダイレクトすること
-      it 'redirects to the login page' do
-        get :edit, params: { id: @other_user.id }
-        expect(response).to redirect_to login_path
+        aggregate_failures do
+          expect(response).to have_http_status '302'
+          expect(flash[:danger]).to eq 'ログインしてください'
+          expect(response).to redirect_to login_path
+        end
       end
     end
   end
@@ -134,12 +113,9 @@ RSpec.describe UsersController, type: :controller do
   describe '#update' do
     # 認可されたユーザーとして
     context 'as an authorized user' do
-      before do
-        @user = create(:user)
-      end
-
       # ユーザー情報を更新できること
       it 'updates a post' do
+        @user = create(:user)
         user_params = attributes_for(:user, name: 'New User Name')
         log_in_as @user
         patch :update, params: { id: @user.id, user: user_params }
@@ -172,7 +148,6 @@ RSpec.describe UsersController, type: :controller do
 
       # rootへリダイレクトすること
       it 'redirects to root' do
-        user_params = attributes_for(:user)
         log_in_as @user
         patch :update, params: { id: @other_user.id, post: user_params }
         expect(response).to redirect_to root_path
@@ -185,25 +160,15 @@ RSpec.describe UsersController, type: :controller do
         @other_user = create(:user)
       end
 
-      # 302レスポンスを返すこと
-      it 'returns a 302 response' do
-        user_params = attributes_for(:user)
+      # 302レスポンスを返し、dangerフラッシュメッセージを出力し、ログイン画面にリダイレクトすること
+      it 'returns a 302 response & prints danger flash message & redirects to login page' do
         patch :update, params: { id: @other_user.id, user: user_params }
-        expect(response).to have_http_status '302'
-      end
 
-      # dangerフラッシュメッセージが出力すること
-      it 'prints danger flash message' do
-        user_params = attributes_for(:user)
-        patch :update, params: { id: @other_user.id, user: user_params }
-        expect(flash[:danger]).to eq 'ログインしてください'
-      end
-
-      # ログイン画面にリダイレクトすること
-      it 'redirects to the login page' do
-        user_params = attributes_for(:user)
-        patch :update, params: { id: @other_user.id, user: user_params }
-        expect(response).to redirect_to login_path
+        aggregate_failures do
+          expect(response).to have_http_status '302'
+          expect(flash[:danger]).to eq 'ログインしてください'
+          expect(response).to redirect_to login_path
+        end
       end
     end
   end
@@ -211,14 +176,12 @@ RSpec.describe UsersController, type: :controller do
   describe '#destroy' do
     # 認可されたユーザーとして
     context 'as an authorized user' do
-      before do
-        @user = create(:user, admin: true)
-        @other_user = create(:user)
-      end
-
       # 投稿を削除できること
       it 'deletes a post' do
+        @user = create(:user, admin: true)
+        @other_user = create(:user)
         log_in_as @user
+
         expect do
           delete :destroy, params: { id: @other_user.id }
         end.to change(User, :count).by(-1)
@@ -227,50 +190,34 @@ RSpec.describe UsersController, type: :controller do
 
     # 認可されていないユーザーとして
     context 'as an unauthorized user' do
-      before do
+      # 投稿を削除できず、rootへリダイレクトすること
+      it 'does not delete the post & redirects to root' do
         @user = create(:user)
         @other_user = create(:user)
-      end
-
-      # 投稿を削除できないこと
-      it 'does not delete the post' do
         log_in_as @user
-        expect do
-          delete :destroy, params: { id: @other_user.id }
-        end.to_not change(User, :count)
-      end
 
-      # rootへリダイレクトすること
-      it 'redirects to root' do
-        log_in_as @user
-        delete :destroy, params: { id: @other_user.id }
-        expect(response).to redirect_to root_path
+        aggregate_failures do
+          expect do
+            delete :destroy, params: { id: @other_user.id }
+          end.to_not change(User, :count)
+          expect(response).to redirect_to root_path
+        end
       end
     end
 
     # ゲストとして
     context 'as a guest' do
-      before do
+      # 投稿を削除できず、302レスポンスを返し、ログインへリダイレクトすること
+      it 'does not delete a post & returns a 302 response & redirects to login page' do
         @other_user = create(:user)
-      end
 
-      # 302レスポンスを返すこと
-      it 'returns a 302 response' do
-        delete :destroy, params: { id: @other_user.id }
-        expect(response).to have_http_status '302'
-      end
-
-      # ログインへリダイレクトすること
-      it 'redirects to login page' do
-        delete :destroy, params: { id: @other_user.id }
-        expect(response).to redirect_to login_path
-      end
-
-      # 投稿を削除できないこと
-      it 'does not delete the post' do
-        expect do
-          delete :destroy, params: { id: @other_user.id }
-        end.to_not change(User, :count)
+        aggregate_failures do
+          expect do
+            delete :destroy, params: { id: @other_user.id }
+          end.to_not change(User, :count)
+          expect(response).to have_http_status '302'
+          expect(response).to redirect_to login_path
+        end
       end
     end
   end
