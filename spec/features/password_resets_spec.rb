@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "PasswordResets", type: :feature do
+RSpec.feature 'PasswordResets', type: :feature do
   # パスワードリセットの検証
   scenario 'validation of password reset' do
     user = create(:user, :do_activate)
@@ -33,7 +33,7 @@ RSpec.feature "PasswordResets", type: :feature do
     # 無効なメールアドレスでは、rootにリダイレクトされる
     reset_email = ActionMailer::Base.deliveries.last
     email_body = reset_email.html_part.body.encoded
-    reset_token = email_body[/(?<=password_resets\/)[^\/]+/]
+    reset_token = email_body[%r{(?<=password_resets/)[^/]+}]
     expect(reset_token).to_not be_nil
     visit edit_password_reset_path(reset_token, email: '')
     expect(current_path).to eq root_path
@@ -92,11 +92,10 @@ RSpec.feature "PasswordResets", type: :feature do
 
     reset_email = ActionMailer::Base.deliveries.last
     email_body = reset_email.html_part.body.encoded
-    reset_token = email_body[/(?<=password_resets\/)[^\/]+/]
+    reset_token = email_body[%r{(?<=password_resets/)[^/]+}]
 
     user.update_attribute(:reset_sent_at, 3.hours.ago)
     visit edit_password_reset_path(reset_token, email: user.email)
-    save_and_open_page
     expect(page).to have_selector 'div.alert-danger', text: '有効期限が切れているため、パスワードを再設定できませんでした'
   end
 end

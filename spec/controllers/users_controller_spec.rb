@@ -4,10 +4,10 @@ RSpec.describe UsersController, type: :controller do
   # let(:user) { create(:user, :do_activate) }
   let(:user_params) { attributes_for(:user) }
 
-  it { is_expected.to use_before_action :logged_in_user}
-  it { is_expected.to use_before_action :correct_user}
-  it { is_expected.to use_before_action :admin_user}
-  it { is_expected.to permit(:name, :email, :password, :password_confirmation).for(:create, params: { user: user_params } ) }
+  it { is_expected.to use_before_action :logged_in_user }
+  it { is_expected.to use_before_action :correct_user }
+  it { is_expected.to use_before_action :admin_user }
+  it { is_expected.to permit(:name, :email, :password, :password_confirmation).for(:create, params: { user: user_params }) }
   # it { is_expected.to permit(:name, :email, :password, :password_confirmation).for(:update, params: { id: user.id, user: user_params } ) }
 
   describe '#new' do

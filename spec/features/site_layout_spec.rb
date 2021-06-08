@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SiteLayout", type: :feature do
+RSpec.feature 'SiteLayout', type: :feature do
   # 未ログインの場合、適切なリンクが生成されていること
   scenario 'layout links are created before login' do
     visit root_path

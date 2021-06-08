@@ -29,12 +29,12 @@ RSpec.describe FavoritesController, type: :controller do
 
       # favoriteを追加できないこと
       # it 'does not adda a favorite' do
-        
+
       # end
 
       # rootにリダイレクトすること
       # it 'redirects to root' do
-        
+
       # end
     end
 
@@ -47,12 +47,11 @@ RSpec.describe FavoritesController, type: :controller do
 
       # loginページにリダイレクトすること
       # it 'redirects to login page' do
-        
+
       # end
     end
   end
 
   describe '#destroy' do
-    
   end
 end
