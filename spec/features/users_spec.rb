@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Users", type: :feature do
-  let(:user) { create(:user, :do_activate)}
+RSpec.feature 'Users', type: :feature do
+  let(:user) { create(:user, :do_activate) }
 
   # ログイン後、フレンドリーフォワーディングされる
   scenario 'friendly forwarding after login' do
@@ -18,13 +18,13 @@ RSpec.feature "Users", type: :feature do
   scenario 'user cannot create with invalid data' do
     visit root_path
     click_link '新規登録'
-    expect {
+    expect do
       fill_in 'アカウント名', with: ''
       fill_in 'メールアドレス',	with: 'ex@ample.com'
       fill_in 'パスワード',	with: 'foo'
       fill_in 'パスワード再入力',	with: 'bar'
       click_button '登録する'
-    }.to_not change(User, :count)
+    end.to_not change(User, :count)
 
     aggregate_failures do
       expect(current_path).to eq users_path
@@ -39,19 +39,19 @@ RSpec.feature "Users", type: :feature do
     visit root_path
     click_link '新規登録'
 
-    expect {
+    expect do
       fill_in 'アカウント名', with: 'Test User'
       fill_in 'メールアドレス',	with: 'ex@ample.com'
       fill_in 'パスワード',	with: 'password'
       fill_in 'パスワード再入力',	with: 'password'
       click_button '登録する'
-    }.to change(User, :count).by(1)
+    end.to change(User, :count).by(1)
 
     expect(current_path).to eq root_path
     user = User.first
     activation_email = ActionMailer::Base.deliveries.last
     email_body = activation_email.html_part.body.encoded
-    activation_token = email_body[/(?<=account_activations\/)[^\/]+/]
+    activation_token = email_body[%r{(?<=account_activations/)[^/]+}]
     expect(activation_token).to_not be_nil
 
     # 有効化してない状態でログインしても、flashメッセージが出力され、rootにリダイレクトされる

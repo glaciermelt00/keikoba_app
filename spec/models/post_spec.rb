@@ -6,7 +6,7 @@ RSpec.describe Post, type: :model do
   it { is_expected.to have_many(:bookmarks).dependent(:destroy) }
   it { is_expected.to have_many_attached :images }
   it { is_expected.to validate_presence_of :name }
-  it { is_expected.to validate_presence_of :user_id}
+  it { is_expected.to validate_presence_of :user_id }
 
   # name, user_idがあれば、有効な状態であること
   it 'is valid with a name and user_id' do

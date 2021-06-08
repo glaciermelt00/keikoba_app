@@ -9,12 +9,12 @@ RSpec.describe User, type: :model do
 
   valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
   valid_addresses.each do |valid_address|
-    it { is_expected.to allow_value(valid_address).for(:email) } 
+    it { is_expected.to allow_value(valid_address).for(:email) }
   end
 
   invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com foo@bar..com]
   invalid_addresses.each do |invalid_address|
-    it { is_expected.to_not allow_value(invalid_address).for(:email) } 
+    it { is_expected.to_not allow_value(invalid_address).for(:email) }
   end
 
   it { is_expected.to validate_length_of(:email).is_at_most(255) }
