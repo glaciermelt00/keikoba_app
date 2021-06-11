@@ -19,6 +19,7 @@ jobs:
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
+        env_file: db.env
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
