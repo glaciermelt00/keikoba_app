@@ -70,6 +70,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'rspec_junit_formatter'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
