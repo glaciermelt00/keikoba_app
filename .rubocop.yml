@@ -17,7 +17,7 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'vendor/**/*'
-    - !ruby/regexp /old_and_unused\.rb$/
+    # - !ruby/regexp /old_and_unused\.rb$/
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
     - '/Users/glaciermelt/environment/keikoba_app/node_modules/node-sass/src/libsass/extconf.rb'
 
