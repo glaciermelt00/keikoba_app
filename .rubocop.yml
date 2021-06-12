@@ -7,7 +7,7 @@ require:
 
 AllCops:
   # Rubyバージョン指定
-  TargetRubyVersion: 2.6.3
+  TargetRubyVersion: 2.6
   # 除外
   Exclude:
     - 'config.ru'
@@ -16,9 +16,11 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
-    - !ruby/regexp /old_and_unused\.rb$/
+    - 'vendor/**/*'
+    # - !ruby/regexp /old_and_unused\.rb$/
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
     - '/Users/glaciermelt/environment/keikoba_app/node_modules/node-sass/src/libsass/extconf.rb'
+    - 'node_modules/node-sass/src/libsass/extconf.rb'
 
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
