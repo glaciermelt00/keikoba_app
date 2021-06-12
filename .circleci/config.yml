@@ -17,9 +17,8 @@ jobs:
       # Mysqlのバージョン5.6.51で動かしていたため、5.6を指定
       - image: circleci/mysql:5.6.51
         environment:
-          # - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
-        env_file: db.env
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -51,7 +50,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
 # ②ちょっと無理やりですが、database.ymlとdatabase.yml.ciを入れ替える記述です。
-      # - run: mv config/database.yml.ci config/database.yml 
+      - run: mv config/database.yml.ci config/database.yml 
 
       # Database setup
       - run: bundle exec rake db:create
