@@ -17,7 +17,8 @@ jobs:
       # Mysqlのバージョン5.6.51で動かしていたため、5.6を指定
       - image: circleci/mysql:5.6.51
         environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          # - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_PASSWORD: 'zimNQBUnXbgaseyaaWEPJU3X'
           - MYSQL_ROOT_HOST: '%'
 
       # Specify service dependencies here if necessary
