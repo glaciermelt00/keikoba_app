@@ -58,7 +58,7 @@ jobs:
       - run: bundle exec rake db:schema:load
 
       # Webpackをビルドする
-      - run: bundle exec bin/webpack
+      - run: bin/webpack
 
 # rubocopを走らせる記述です。
       - run:
