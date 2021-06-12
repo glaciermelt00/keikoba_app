@@ -57,6 +57,9 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
+      # yarnをインストール
+      - run: yarn install
+
       # Webpackをビルドする
       - run: bin/webpack
 
