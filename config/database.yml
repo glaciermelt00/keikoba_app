@@ -28,8 +28,6 @@ development:
 test:
   <<: *default
   database: keikoba_app_test
-  # host: '127.0.0.1'
-  # port: 3306
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -51,9 +49,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: mysql2
-  encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  <<: *default
   database: <%= Rails.application.credentials.db[:database] %>
   username: <%= Rails.application.credentials.db[:username] %>
   password: <%= Rails.application.credentials.db[:password] %>
