@@ -21,6 +21,8 @@ AllCops:
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
     - '/Users/glaciermelt/environment/keikoba_app/node_modules/node-sass/src/libsass/extconf.rb'
     - 'node_modules/node-sass/src/libsass/extconf.rb'
+    - 'node_modules/@rails/webpacker/node_modules/node-sass/src/libsass/contrib/libsass.spec'
+    - 'node_modules/@rails/webpacker/node_modules/node-sass/src/libsass/extconf.rb'
 
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
