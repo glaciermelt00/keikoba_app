@@ -67,7 +67,7 @@ server '35.74.35.169',
     # port: 22022,
     # user: "odatakashi", # overrides user setting above
     auth_methods: %w(publickey),
-    keys: %w(~/.ssh/myserverkey.pem)
+    keys: %w(~/.ssh/myserverkey.pem),
     forward_agent: true
     #     # password: "please use keys"
   }
