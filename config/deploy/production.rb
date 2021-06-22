@@ -60,4 +60,14 @@
 #     # password: "please use keys"
 #   }
 
-server '35.74.35.169', user: 'ec2-user', roles: %w{app db web}
+server '35.74.35.169',
+  user: 'ec2-user',
+  roles: %w{app db web},
+  ssh_options: {
+    # port: 22022,
+    # user: "odatakashi", # overrides user setting above
+    auth_methods: ['publickey'],
+    keys: ['~/.ssh/myserverkey.pem']
+    forward_agent: true
+    #     # password: "please use keys"
+  }
