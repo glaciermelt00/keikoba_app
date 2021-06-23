@@ -94,16 +94,20 @@ jobs:
 
   deploy:
     docker:
-      - image: buildpack-deps:trusty
+      # - image: buildpack-deps:trusty # Herokuデプロイの際に使用
+      - image: circleci/ruby:2.6.7-node-browsers
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # - restore_cache: # 不要?
+      #     keys:
+      #       - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - add_ssh_keys:
             fingerprints:
               - "c5:a1:cc:81:f9:c9:c1:c6:15:b1:30:2b:16:68:33:11"
-      - deploy:
+      - run:
+          name: バンドル インストール
+          command: bundle check || bundle install
+      - run:
           name: Capistrano deploy
           command: bundle exec cap production deploy
       # - run:
