@@ -113,7 +113,6 @@ jobs:
       - run:
           name: Capistrano deploy
           command: bundle exec cap production deploy
-
       # - run:
       #     name: Heroku への master のデプロイ
       #     command: |
