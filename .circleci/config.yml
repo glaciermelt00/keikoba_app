@@ -100,10 +100,13 @@ jobs:
       - add_ssh_keys:
             fingerprints:
               - "c5:a1:cc:81:f9:c9:c1:c6:15:b1:30:2b:16:68:33:11"
-      - run:
-          name: Heroku への master のデプロイ
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - deploy:
+          name: Capistrano deploy
+          command: bundle exec cap production deploy
+      # - run:
+      #     name: Heroku への master のデプロイ
+      #     command: |
+      #       git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 workflows:
   version: 2
