@@ -96,6 +96,7 @@ jobs:
     docker:
       # - image: buildpack-deps:trusty # Herokuデプロイの際に使用
       - image: circleci/ruby:2.6.7-node-browsers
+
     steps:
       - checkout
       - restore_cache:
