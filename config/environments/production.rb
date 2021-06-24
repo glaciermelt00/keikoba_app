@@ -70,14 +70,14 @@ Rails.application.configure do
 
   ActionMailer::Base.smtp_settings = {
     # address のところは変更しないので注意。自分はここでハマりました。
-    :address        =>  Rails.application.credentials.mail[:address],
-    :domain         =>  Rails.application.credentials.mail[:domain],
-    :port           =>  Rails.application.credentials.mail[:port],
+    address: 'smtp.gmail.com',
+    domain: 'gmail.com',
+    port: 587,
     # user_name は自分のメールアドレスを記載。
-    :user_name      =>  Rails.application.credentials.mail[:user_name],
+    user_name: Rails.application.credentials.mail[:user_name],
     # password は作成したアプリパスワードを記載。
-    :password       =>  Rails.application.credentials.mail[:password],
-    :authentication =>  :plain,
+    password: Rails.application.credentials.mail[:password],
+    authentication: :login,
     enable_starttls_auto: true
   }
 
