@@ -67,16 +67,31 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'blooming-forest-86635.herokuapp.com'
-  config.action_mailer.default_url_options = { host: host }
+
   ActionMailer::Base.smtp_settings = {
-    :port           =>  ENV['MAILGUN_SMTP_PORT'],
-    :address        =>  ENV['MAILGUN_SMTP_SERVER'],
-    :user_name      =>  ENV['MAILGUN_SMTP_LOGIN'],
-    :password       =>  ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         =>  host,
+    # address のところは変更しないので注意。自分はここでハマりました。
+    :address        =>  Rails.application.credentials.mail[:address],
+    :domain         =>  Rails.application.credentials.mail[:domain],
+    :port           =>  Rails.application.credentials.mail[:port],
+    # user_name は自分のメールアドレスを記載。
+    :user_name      =>  Rails.application.credentials.mail[:user_name],
+    # password は作成したアプリパスワードを記載。
+    :password       =>  Rails.application.credentials.mail[:password],
     :authentication =>  :plain,
+    enable_starttls_auto: true
   }
+
+  # HerokuのアドオンMailgunの設定
+  # host = 'blooming-forest-86635.herokuapp.com'
+  # config.action_mailer.default_url_options = { host: host }
+  # ActionMailer::Base.smtp_settings = {
+  #   :port           =>  ENV['MAILGUN_SMTP_PORT'],
+  #   :address        =>  ENV['MAILGUN_SMTP_SERVER'],
+  #   :user_name      =>  ENV['MAILGUN_SMTP_LOGIN'],
+  #   :password       =>  ENV['MAILGUN_SMTP_PASSWORD'],
+  #   :domain         =>  host,
+  #   :authentication =>  :plain,
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
