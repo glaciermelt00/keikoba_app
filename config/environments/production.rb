@@ -75,9 +75,9 @@ Rails.application.configure do
     domain: 'gmail.com',
     port: 587,
     # user_name は自分のメールアドレスを記載。
-    user_name: Rails.application.credentials.mail[:user_name],
+    # user_name: Rails.application.credentials.mail[:user_name],
     # password は作成したアプリパスワードを記載。
-    password: Rails.application.credentials.mail[:password],
+    # password: Rails.application.credentials.mail[:password],
     authentication: :plain,
     enable_starttls_auto: true
   }
