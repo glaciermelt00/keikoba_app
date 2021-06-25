@@ -69,7 +69,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.default_url_options = { host: 'ec2-35-74-35-169.ap-northeast-1.compute.amazonaws.com' }
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.smtp_settings = {
     # address のところは変更しないので注意。自分はここでハマりました。
     address: 'smtp.gmail.com',
     domain: 'gmail.com',
