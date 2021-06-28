@@ -17,16 +17,18 @@
           <li class="nav-item">
             <%= link_to "", users_path, class: "nav-link fas fa-users fa-lg" %>
           </li>
-          <li class="nav-item">
-            <i class="nav-link fas fa-search fa-lg disabled"></i>
-          </li>
-          <li class="nav-item">
-            <form>
-              <input class="form-control me-2" type="search" placeholder="検索..." aria-label="Search">
-            </form>
-          </li>
         </ul>
+        <% if !current_page?(login_path) && !current_page?(signup_path) %>
+          <div class="d-flex ms-auto me-3 input-group">
+            <input class="form-control" type="search" placeholder="施設名, 住所, ..." aria-label="Search" aria-describedby="button-addon1">
+            <button class="btn btn-outline-success" type="submit" id="button-addon1">
+              <span class="fas fa-search fa-lg"></span>
+            </button>
+          </div>
+        <ul class="navbar-nav">
+        <% else %>
         <ul class="navbar-nav ms-auto">
+        <% end %>
           <% if logged_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link fas fa-user fa-lg text-secondary dropdown-toggle" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"></a>
@@ -41,11 +43,9 @@
                 <li><%= link_to "ログアウト", logout_path, method: :delete, class: "dropdown-item" %></li>
               </ul>
             </li>
-            <li class="px-2"></li>
             <li class="nav-item">
               <a class="nav-link fas fa-bell fa-lg text-secondary" href="#"></a>
             </li>
-            <li class="px-2"></li>
             <li class="nav-item">
               <%= link_to "", new_post_path, class: "nav-link fas fa-edit fa-lg text-secondary" %>
             </li>
