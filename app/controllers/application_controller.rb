@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
+  before_action :set_search
+
+  def set_search
+    @q = Post.ransack(params[:q])
+    @search_posts = @q.result(distinct: true)
+  end
+
   private
 
   # ユーザーのログインを確認する

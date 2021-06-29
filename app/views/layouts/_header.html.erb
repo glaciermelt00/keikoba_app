@@ -19,15 +19,15 @@
           </li>
         </ul>
         <% if !current_page?(login_path) && !current_page?(signup_path) %>
-          <div class="d-flex ms-auto me-3 input-group">
-            <input class="form-control" type="search" placeholder="施設名, 住所, ..." aria-label="Search" aria-describedby="button-addon1">
-            <button class="btn btn-outline-success" type="submit" id="button-addon1">
+          <%= search_form_for @q, url: posts_path, class: 'ms-auto me-3 input-group' do |f| %>
+            <%= f.search_field :name_cont, placeholder: '施設名で検索', class: 'form-control', 'aria-label' => 'Search', 'aria-describedby' => 'button-addon1' %>
+            <%= f.button type: 'submit', class: 'btn btn-outline-success', id: 'button-addon1' do %>
               <span class="fas fa-search fa-lg"></span>
-            </button>
-          </div>
-        <ul class="navbar-nav">
+            <% end %>
+          <% end %>
+          <ul class="navbar-nav">
         <% else %>
-        <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto">
         <% end %>
           <% if logged_in? %>
             <li class="nav-item dropdown">

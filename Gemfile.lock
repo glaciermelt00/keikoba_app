@@ -37,7 +37,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_storage_validations (0.9.4)
+    active_storage_validations (0.9.5)
       rails (>= 5.2.0)
     activejob (6.0.4)
       activesupport (= 6.0.4)
@@ -66,8 +66,8 @@ GEM
     autoprefixer-rails (10.2.5.1)
       execjs (> 0)
     aws-eventstream (1.1.1)
-    aws-partitions (1.469.0)
-    aws-sdk-core (3.114.3)
+    aws-partitions (1.472.0)
+    aws-sdk-core (3.115.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -229,6 +229,10 @@ GEM
     rainbow (3.0.0)
     raindrops (0.19.2)
     rake (13.0.3)
+    ransack (2.4.2)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -255,7 +259,7 @@ GEM
     rspec-support (3.10.2)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (1.17.0)
+    rubocop (1.18.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -269,7 +273,7 @@ GEM
     rubocop-discourse (2.4.2)
       rubocop (>= 1.1.0)
       rubocop-rspec (>= 2.0.0)
-    rubocop-rails (2.10.1)
+    rubocop-rails (2.11.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -378,6 +382,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.6)
   rails-i18n
+  ransack
   rspec-rails (~> 4.1.0)
   rspec_junit_formatter
   rubocop
