@@ -21,7 +21,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def index; end
+  def index
+    @pagy, @posts = pagy(Post.order(created_at: :desc))
+  end
 
   def edit; end
 
