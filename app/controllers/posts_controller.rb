@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
+
   before_action :logged_in_user, except: %i[show index]
   before_action :post_owner, only: %i[edit update destroy]
 
@@ -22,7 +24,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @pagy, @posts = pagy(Post.order(created_at: :desc))
+    @posts = Post.order(created_at: :desc)
+    @pagy_posts, @posts = pagy(@posts, page_param: :page_posts)
+    @pagy_search_posts, @search_posts = pagy(@search_posts, page_param: :page_search_posts)
   end
 
   def edit; end
