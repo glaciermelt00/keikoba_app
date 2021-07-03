@@ -21,8 +21,29 @@ User.create!(name:  name,
 end
 
 # ユーザーの一部を対象にPostを生成する。
-users = User.order(:created_at).take(6)
-50.times do
-  name = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.posts.create!(name: name) }
+users = User.order(:created_at).take(10)
+name_prefix = %W( #{}
+                  総合
+                  記念
+                  ナショナル
+                  第一
+                  第二
+                  中央
+                  地域 )
+name_body = %w( スポーツ会館
+                体育室
+                スポーツセンター
+                武道館
+                体育館
+                アリーナ
+                競技場
+                運動場
+                公園
+                スポーツハウス
+                スポーツプラザ )
+100.times do
+  gimei_address = Gimei.address
+  name = "#{gimei_address.town.kanji}#{name_prefix.sample}#{name_body.sample}"
+  address = gimei_address.kanji
+  users.sample.posts.create!(name: name, address: address)
 end

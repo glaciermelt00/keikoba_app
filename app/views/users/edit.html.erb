@@ -1,5 +1,5 @@
 <% provide(:title, "アカウント設定") %>
-<h1 class="mt-5 text-center">アカウント設定</h1>
+<h2 class="mt-5 text-center">アカウント設定</h2>
 <div class="signup-form">
   <%= form_with(model: @user, local: true, class: "form-horizontal") do |f| %>
     <%= render 'shared/error_messages', object: f.object %>

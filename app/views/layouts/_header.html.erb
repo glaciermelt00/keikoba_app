@@ -20,7 +20,7 @@
         </ul>
         <% if !current_page?(login_path) && !current_page?(signup_path) %>
           <%= search_form_for @q, url: posts_path, class: 'ms-auto me-3 input-group' do |f| %>
-            <%= f.search_field :name_cont, placeholder: '施設名で検索', class: 'form-control', 'aria-label' => 'Search', 'aria-describedby' => 'button-addon1' %>
+            <%= f.search_field :address_cont, placeholder: '住所で検索', class: 'form-control', 'aria-label' => 'Search', 'aria-describedby' => 'button-addon1' %>
             <%= f.button type: 'submit', class: 'btn btn-outline-success', id: 'button-addon1' do %>
               <span class="fas fa-search fa-lg"></span>
             <% end %>

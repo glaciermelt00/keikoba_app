@@ -8,11 +8,20 @@
   <body class="d-flex flex-column h-100">
     <%= render 'layouts/header' %>
     <main class="flex-shrink-0">
-      <div class="container pad-adjust mt-5 pt-3">
+      <div class="container pad-adjust mt-5 pt-3 row">
         <% flash.each do |message_type, message| %>
           <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
         <% end %>
-        <%= yield %>
+        <% if !params[:q].nil? %>
+          <aside class="col-md-4">
+            <%= render 'shared/detail_search' %> 
+          </aside>
+        <div class="col-md-8">
+        <% else %>
+        <div>
+        <% end %>
+          <%= yield %>
+        </div>
       </div>
       <%= debug(params) if Rails.env.development? %>
     </main>

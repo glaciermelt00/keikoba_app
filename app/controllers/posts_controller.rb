@@ -27,6 +27,7 @@ class PostsController < ApplicationController
     @posts = Post.order(created_at: :desc)
     @pagy_posts, @posts = pagy(@posts, page_param: :page_posts)
     @pagy_search_posts, @search_posts = pagy(@search_posts, page_param: :page_search_posts)
+    gon.search_posts = @search_posts
   end
 
   def edit; end
