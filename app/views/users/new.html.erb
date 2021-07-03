@@ -1,10 +1,10 @@
 <% provide(:title, "新規登録") %>
-<h1 class="mt-5 text-center">KEIKOBAにようこそ！</h1>
+<h2 class="mt-5 text-center">KEIKOBAにようこそ！</h2>
 <div class="signup-form">
   <%= form_with(model: @user, local: true, class: "form-horizontal") do |f| %>
     <div class="row">
       <div class="col-8 offset-4">
-        <h2>KEIKOBAに登録</h2>
+        <h3>KEIKOBAに登録</h3>
       </div>
     </div>
     <%= render 'shared/error_messages', object: f.object %>

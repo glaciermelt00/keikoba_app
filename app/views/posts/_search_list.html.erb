@@ -1,5 +1,12 @@
+<% provide(:title, "検索結果") %>
+<div class="container">
+  <h2>
+    <%= params[:q][:address_cont] %>
+    <span style="font-size: 0.7em;">の検索結果</span>
+  </h2>
+</div>
 <div class="mt-4">
-  <%== pagy_bootstrap_nav(@pagy_search_posts) %>
+  <div id="map" style="width: 620px; height: 400px;"></div>
 </div>
 <div class="container">
   <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -9,3 +16,55 @@
 <div class="mt-4">
   <%== pagy_bootstrap_nav(@pagy_search_posts) %>
 </div>
+
+<script type="text/javascript">
+    function initMap() {
+        let map
+        let bounds = new google.maps.LatLngBounds();
+        let markers = [];
+        let infowindow = [];
+        const posts = gon.search_posts;
+
+        for (let i = 0; i < posts.length; i++) {
+            let post = posts[i];
+            let position = { lat: post.latitude, lng: post.longitude };
+
+            if (i == 0) {
+                // mapの初期位置設定
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: position
+                });
+            };
+
+            let contentString = `<a href='/posts/${post.id}'>${post.address}</a>`;
+
+            // 吹き出しでテキストを表示
+            infowindow[i] = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            // markerを表示
+            // map.setCenter(position);
+            markers[i] = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: contentString
+            });
+
+            markers[i].addListener("click", function() {
+                infowindow[i].open(map, markers[i]);
+            });
+
+            bounds.extend(markers[i].position);
+        };
+
+        if (markers.length > 1) {
+            map.fitBounds(bounds);
+        };
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.gcp[:maps_api_key] %>&callback=initMap">
+</script>
