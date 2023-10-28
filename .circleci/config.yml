@@ -7,11 +7,11 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      # ruby2.6.7を使ったアプリのため
-      - image: circleci/ruby:2.6.7-node-browsers
+      # ruby2.7.6を使ったアプリのため
+      - image: circleci/ruby:2.7.6-node-browsers
         environment:
           #  ①注意！！ bundlerのバージョンが2.0.1以上だと、bundle installに失敗します。ここに環境として指定します。
-          BUNDLER_VERSION: 2.2.16
+          BUNDLER_VERSION: 2.4.21
           #  ②注意！！ circleCIは仮想環境を構築するので、そのときに使うデータベースを指定する必要があります。
           RAILS_ENV: 'test'
       # Mysqlのバージョン5.6.51で動かしていたため、5.6を指定
@@ -42,7 +42,7 @@ jobs:
           name: install dependencies
           # ①bundler2.0.1以降のものを使っているのであれば、環境変数と合わせて指定する必要があります。
           command: |
-            gem install bundler -v 2.2.16
+            gem install bundler -v 2.4.21
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
@@ -95,7 +95,7 @@ jobs:
   deploy:
     docker:
       # - image: buildpack-deps:trusty # Herokuデプロイの際に使用
-      - image: circleci/ruby:2.6.7-node-browsers
+      - image: circleci/ruby:2.7.6-node-browsers
 
     steps:
       - checkout
@@ -109,7 +109,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            gem install bundler -v 2.2.16
+            gem install bundler -v 2.4.21
             bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
