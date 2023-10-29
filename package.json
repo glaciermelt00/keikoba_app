@@ -5,15 +5,14 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.3.0",
+    "@rails/webpacker": "^5.4.4",
     "bootstrap": "^5.0.0",
     "braces": "^3.0.2",
     "glob-parent": "^6.0.0",
     "jquery": "^3.6.0",
     "minimist": "^1.2.5",
-    "node-sass": "^6.0.0",
-    "popper.js": "^1.16.1",
-    "set-value": "^4.0.0",
+    "@popperjs/core": "^2.11.8",
+    "set-value": "^4.1.0",
     "to": "^0.2.9",
     "trim-newlines": "^4.0.2",
     "turbolinks": "^5.2.0",
@@ -22,6 +21,6 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^4.15.1"
   }
 }
