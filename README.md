@@ -1,24 +1,15 @@
-# README
+## DB Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+// docker の web サーバーに入る
+$ docker-compose exec web bash
 
-Things you may want to cover:
+// DB の作成
+root@5ae64ed1e9ae:/keikoba_app# rails db:create
 
-* Ruby version
+// DB のマイグレーション
+root@5ae64ed1e9ae:/keikoba_app# rails db:migrate
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+// DB のシードデータの投入
+root@5ae64ed1e9ae:/keikoba_app# rails db:seed
+```
