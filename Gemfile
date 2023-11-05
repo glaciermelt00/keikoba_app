@@ -21,8 +21,8 @@ gem 'mysql2', '>= 0.4.4'
 gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+# Install instead of webpacker
+gem 'jsbundling-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -43,6 +43,9 @@ gem 'mini_racer'
 gem 'ransack'
 gem 'geocoder'
 gem 'gon'
+
+# https://zenn.dev/tarou_yuruyuru/articles/163f5b734409f7
+gem 'net-http'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -75,7 +78,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   # gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', '~> 5.3.0'
 
   gem 'database_cleaner'
   gem 'factory_bot_rails'
