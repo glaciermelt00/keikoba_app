@@ -6,7 +6,6 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "^5.4.4",
     "bootstrap": "^5.0.0",
     "braces": "^3.0.2",
     "glob-parent": "^6.0.0",
@@ -20,9 +19,7 @@
     "yargs-parser": "^20.2.9"
   },
   "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^4.15.1"
-  },
+  "devDependencies": {},
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.config.js"
   }
