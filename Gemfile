@@ -44,6 +44,9 @@ gem 'ransack'
 gem 'geocoder'
 gem 'gon'
 
+# https://zenn.dev/tarou_yuruyuru/articles/163f5b734409f7
+gem 'net-http'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

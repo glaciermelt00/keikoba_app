@@ -15,4 +15,8 @@ class Post < ApplicationRecord
   def display_image
     images.first.variant(resize_to_limit: [500, 500])
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "available_time", "content", "created_at", "fee", "holiday", "id", "latitude", "longitude", "name", "phone_number", "updated_at", "url", "user_id"]
+  end
 end
